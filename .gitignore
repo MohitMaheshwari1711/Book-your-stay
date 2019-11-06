@@ -25,3 +25,4 @@ yarn-error.log*
 
 # System Files
 /server/config/dev.js
+/src/secure.js
