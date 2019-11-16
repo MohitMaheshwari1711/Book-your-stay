@@ -15,9 +15,14 @@ class RentalList extends React.Component {
         })
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.dispatch(actions.fetchRentals());
     }
+
+    // componentWillMount() {
+    //     this.props.dispatch(actions.fetchRentals());
+    // }
+
 
     render() {
         return (

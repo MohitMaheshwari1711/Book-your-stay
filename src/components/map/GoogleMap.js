@@ -50,9 +50,13 @@ function withGeoCode(WrappedComponent) {
             };
         }
 
-        componentWillMount() {
+        componentDidMount() {
             this.getGeoCodedLocation()
         }
+
+        // componentWillMount() {
+        //     this.getGeoCodedLocation()
+        // }
 
         updateCoordinates(coordinates) {
             this.setState({

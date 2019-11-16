@@ -7,10 +7,16 @@ import * as actions from '../../../actions/index';
 
 class RentailDetail extends React.Component {
 
-    componentWillMount() {
+
+    componentDidMount() {
         const rentalId = this.props.match.params._id;
         this.props.dispatch(actions.fetchRentalsbyId(rentalId));
     }
+
+    // componentWillMount() {
+    //     const rentalId = this.props.match.params._id;
+    //     this.props.dispatch(actions.fetchRentalsbyId(rentalId));
+    // }
 
     render() {
 
