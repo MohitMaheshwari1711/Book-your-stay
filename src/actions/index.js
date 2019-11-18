@@ -8,6 +8,10 @@ import {
   LOGOUT
 } from './types';
 import authService from '../services/auth-service';
+import axiosService from '../services/axios-service';
+
+
+const axiosInstance = axiosService.getInstance();
 
 
 const fetchRentalsbyIdInit = () => {
@@ -36,7 +40,7 @@ const fetchRentalsSuccess = (rentals) => {
 
 export const fetchRentals = () => {
   return (dispatch) => {
-    axios.get('http://localhost:3001/api/v1/rentals').then((rentals) => {
+    axiosInstance.get('http://localhost:3001/api/v1/rentals').then((rentals) => {
       dispatch(fetchRentalsSuccess(rentals.data));
     });
   }

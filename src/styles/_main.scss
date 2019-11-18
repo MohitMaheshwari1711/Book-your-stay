@@ -4,6 +4,12 @@
 @import 'rental/rental-listing';
 @import 'rental/rental-detail';
 
+.clickable {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
 .page-title {
     font-size: 30px;
     font-weight: 700;
