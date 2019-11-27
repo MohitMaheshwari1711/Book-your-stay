@@ -61,7 +61,7 @@ export const fetchRentalsbyId = (rentalId) => {
 
 
 export const register = (userData) => {
-  return axios.post(`http://localhost:3001/api/v1/users/register`, {...userData}).then(
+  return axios.post(`http://localhost:3001/api/v1/users/register`, userData).then(
     (res) => {
       return res.data;
     },
@@ -97,7 +97,7 @@ export const checkAuthState = () => {
 
 export const login = (userData) => {
   return dispatch => {
-    return axios.post(`http://localhost:3001/api/v1/users/auth`, {...userData})
+    return axios.post(`http://localhost:3001/api/v1/users/auth`, userData)
     .then(res => res.data)
     .then(token => {
       localStorage.setItem('auth_token', token);
@@ -115,4 +115,11 @@ export const logout = () => {
   return {
     type: LOGOUT
   }
+}
+
+
+export const createBooking = (booking) => {
+  return axiosInstance.post(`http://localhost:3001/api/v1/bookings`, booking)
+  .then(res => res.data)
+  .catch(({response}) => Promise.reject(response.data.errors))
 }
