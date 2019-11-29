@@ -15,6 +15,10 @@ class AuthService {
         localStorage.removeItem('auth_token');
     }
 
+    getUsername() {
+        return this.decode(this.getToken()).username;
+    }
+
     getExpiration(token) {
         const exp = this.decode(token).exp;
         return moment.unix(exp);

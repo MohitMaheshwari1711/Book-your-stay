@@ -3,6 +3,8 @@ import {
   FETCH_RENTALS_BY_ID_SUCCESS,
   FETCH_RENTALS_BY_ID_INIT,
   FETCH_RENTALS_SUCCESS,
+  FETCH_RENTALS_INIT,
+  FETCH_RENTALS_FAIL,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT
@@ -38,10 +40,33 @@ const fetchRentalsSuccess = (rentals) => {
 }
 
 
-export const fetchRentals = () => {
+const fetchRentalsInit = () => {
+  return {
+    type: FETCH_RENTALS_INIT
+  }
+}
+
+
+const fetchRentalsFail = (errors) => {
+  return {
+    type: FETCH_RENTALS_FAIL,
+    errors
+  }
+}
+
+
+export const fetchRentals = (city) => {
+  const url = city ? `/rentals?city=${city}` : '/rentals';
   return (dispatch) => {
-    axiosInstance.get('http://localhost:3001/api/v1/rentals').then((rentals) => {
+
+    dispatch(fetchRentalsInit());
+
+    axiosInstance.get(`http://localhost:3001/api/v1${url}`)
+    .then((rentals) => {
       dispatch(fetchRentalsSuccess(rentals.data));
+    })
+    .catch(({response}) => {
+      dispatch(fetchRentalsFail(response.data.errors))
     });
   }
 }
@@ -54,6 +79,18 @@ export const fetchRentalsbyId = (rentalId) => {
       dispatch(fetchRentalsbyIdSuccess(rental.data));
     });
   }
+}
+
+
+export const createRental = (rentalData) => {
+  return axiosInstance.post(`http://localhost:3001/api/v1/rentals`, rentalData).then(
+    (res) => {
+      return res.data;
+    },
+    (err) => {
+      return Promise.reject(err.response.data.errors);
+    }
+  );
 }
 
 
@@ -73,8 +110,10 @@ export const register = (userData) => {
 
 
 const loginSuccess = () => {
+  const username = authService.getUsername();
   return {
-    type: LOGIN_SUCCESS
+    type: LOGIN_SUCCESS,
+    username
   }
 }
 

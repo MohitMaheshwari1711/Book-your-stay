@@ -52,7 +52,7 @@ class RentailDetail extends React.Component {
             )
         } else {
             return (
-                <h1>Loading...</h1>
+                    <h1>Loading...</h1>
             )
         }
     }
