@@ -5,6 +5,10 @@ export const rentalType = (isShared) => {
     return isShared ? 'shared' : 'entire'
 }
 
+export const formatDate = (date) => {
+    return moment(date).format('MMM Do YY')
+}
+
 export const toUpperCase = (value) => {
     return value ? titleize(value) : ''
 }

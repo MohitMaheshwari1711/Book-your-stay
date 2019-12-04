@@ -5,6 +5,9 @@ import {
   FETCH_RENTALS_SUCCESS,
   FETCH_RENTALS_INIT,
   FETCH_RENTALS_FAIL,
+  FETCH_USER_BOOKINGS_INIT,
+  FETCH_USER_BOOKINGS_SUCCESS,
+  FETCH_USER_BOOKINGS_FAIL,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   LOGOUT
@@ -93,6 +96,43 @@ export const createRental = (rentalData) => {
   );
 }
 
+//---------------------------------------USER BOOKING ACTIONS-------------------------------------------//
+
+const fetchUserBookingsInit = () => {
+  return {
+    type: FETCH_USER_BOOKINGS_INIT
+  }
+}
+
+const fetchUserBookingsSuccess = (userBookings) => {
+  return {
+    type: FETCH_USER_BOOKINGS_SUCCESS,
+    userBookings
+  }
+}
+
+const fetchUserBookingsFail = (errors) => {
+  return {
+    type: FETCH_USER_BOOKINGS_FAIL,
+    errors
+  }
+}
+
+
+export const fetchUserBookings = () => {
+  return dispatch => {
+    dispatch(fetchUserBookingsInit());
+
+    axiosInstance.get(`http://localhost:3001/api/v1/bookings/manage`)
+    .then((userBookings) => {
+      dispatch(fetchUserBookingsSuccess(userBookings.data));
+    })
+    .catch(({response}) => {
+      dispatch(fetchUserBookingsFail(response.data.errors))
+    });
+  }
+}
+
 
 //-------------------------------------------AUTH ACTIONS-----------------------------------------------//
 
@@ -107,6 +147,32 @@ export const register = (userData) => {
     }
   );
 }
+
+
+
+export const getUserRentals = () => {
+  return axiosInstance.get(`http://localhost:3001/api/v1/rentals/manage`).then(
+    (res) => {
+      return res.data;
+    },
+    (err) => {
+      return Promise.reject(err.response.data.errors);
+    }
+  );
+}
+
+
+export const deleteRental = (rentalId) => {
+  return axiosInstance.delete(`http://localhost:3001/api/v1/rentals/${rentalId}`).then(
+    (res) => {
+      return res.data
+    },
+    (err) => {
+      return Promise.reject(err.response.data.errors);
+    }
+  );
+}
+
 
 
 const loginSuccess = () => {
