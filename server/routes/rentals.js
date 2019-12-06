@@ -1,7 +1,7 @@
 const express = require('express');
+const router = express.Router();
 const Rental = require('../models/rental');
 const User = require('../models/user');
-const router = express.Router();
 
 const UserCtrl = require('../controllers/user');
 const { normalizeErrors } = require('../helpers/mongoose');

@@ -10,7 +10,7 @@ export function RentalCard(props) {
         <div className={props.colNum}>
             <Link className='rental-detail-link' to={`/rentals/${rental._id}`}>
                 <div className='card bwm-card'>
-                    <img className='card-img-top' src={rental.image} alt='rental'></img>
+                    <img className='card-img-top' src={rental.image} alt='rental' width='auto' height='180px'></img>
                     <div className='card-block'>
                         <h6 className={`card-subtitle ${rental.category}`}>{rentalType(rental.shared)} {rental.category} &#183; {rental.city}</h6>
                         <h4 className='card-title'>{rental.title}</h4>

@@ -29,7 +29,7 @@ class RentailDetail extends React.Component {
                     <div className='upper-section'>
                         <div className='row'>
                             <div className='col-md-6'>
-                                <img src={rental.image} alt=''></img>
+                                <img src={rental.image} height='360px' alt=''></img>
                             </div>
                             <div className='col-md-6'>
                                <RentalMap location={`${rental.city}, ${rental.street}`}/>

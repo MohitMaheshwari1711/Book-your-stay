@@ -9,6 +9,7 @@ const Rental = require('./models/rental');
 const rentalRoutes = require('./routes/rentals');
 const userRoutes = require('./routes/users');
 const bookingRoutes = require('./routes/bookings');
+const imageUploadRoutes = require('./routes/image-upload');
 
 mongoose.connect(config.DB_URI, { useNewUrlParser: true }).then(() => {
     const fakeDb = new FakeDb();
@@ -24,6 +25,7 @@ app.use(cors());
 app.use('/api/v1/rentals', rentalRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/bookings', bookingRoutes);
+app.use('/api/v1', imageUploadRoutes);
 
 const PORT = process.env.PORT || 3001;
 
