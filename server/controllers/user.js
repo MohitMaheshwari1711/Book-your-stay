@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const MongooseHelpers = require('../helpers/mongoose');
 const jwt = require('jsonwebtoken');
-const config = require('../config/dev');
+const config = require('../config');
 
 exports.auth = function(req, res) {
     const email = req.body.email;
